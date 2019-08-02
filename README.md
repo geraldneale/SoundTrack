@@ -1,5 +1,5 @@
 # SoundTrack
-Your life's new soundtrack.
+Your life's new soundtrack. A group of Jupyter Notebooks running on Linux.
 
 Todo (20190802):
 1. Upload database creation scripts.
