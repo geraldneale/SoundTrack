@@ -1,5 +1,5 @@
 # SoundTrack
-Your life's new soundtrack. A group of Jupyter Notebooks runs on Linux and plays to connected broswer.
+Your life's new soundtrack. A group of Jupyter Notebooks that plays your music on a weekly schedule and shuffles song in between to fit the gaps. Runs on Linux and plays to connected browser.
 
 Todo (20190802):
 1. Upload database creation scripts.
