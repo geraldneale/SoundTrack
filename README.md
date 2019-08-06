@@ -12,7 +12,6 @@ Todo (20190805):
 Special thanks to:
 
 David Laganella - Master composer, virtuoso, author and professor.
-  (https://www.amazon.com/Mel-Composers-Guide-Electric-Guitar/dp/0786662824)
   (https://en.wikipedia.org/wiki/David_Laganella)
   
 Jackie Neale - Artist.(https://jackiephoto.photoshelter.com/index)  
