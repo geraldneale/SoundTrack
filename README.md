@@ -5,7 +5,8 @@ Todo (20190805):
 1. Re-upload module and program files(cron script, pickle script, and main program).
 2. Upload database creation scripts.
 3. Upload seed mp3s(no license).
-
+4. Get working over a smart phone browser(IPython.display.Audio autoplay non-functioning).
+5. Get working in a Tesla browser through group nightly prayer to Tesla's update team to allow HTML 5 sound of any kind.
 
 Special thanks to:
 
