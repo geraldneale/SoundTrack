@@ -2,7 +2,8 @@ import sqlite3
 from datetime import datetime
 
 def db_name():
-    db_name='soundtrack.db'
+    #db_name='soundtrack.db'
+    db_name='soundtrack-gn.db'
     return db_name
 
 def getMediaDuration(file):
@@ -24,7 +25,6 @@ def getMediaName(file):
 
 def getShuffleCountMode():
     
-    #con = sqlite3.connect(db_name)
     con = sqlite3.connect(db_name())
     table='shuffle_count'
     statement ='SELECT cnt,COUNT(name) shuffle_cnt FROM {} GROUP BY cnt ORDER BY shuffle_cnt ASC'.format(table)
@@ -35,10 +35,20 @@ def getShuffleCountMode():
     con.close()
     return mode
 
+def incrementShuffleCount(statement,song):
+    
+    con = sqlite3.connect(db_name())
+    table='shuffle_count'
+    statement=getShuffleCountExists(song[0])
+    print(statement)
+    con.execute(statement)
+    con.commit()
+    con.close()
+    
+
 #check if the song exists in the db table shuffle_count already
 def getShuffleCountExists(name):
     
-    #con = sqlite3.connect(db_name)
     con = sqlite3.connect(db_name())
     table='shuffle_count'
     statement ='SELECT cnt FROM {} WHERE name="{}" LIMIT 0,1'.format(table,name)
