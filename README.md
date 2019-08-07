@@ -1,6 +1,30 @@
 # SoundTrack
 A group of Jupyter Notebooks that plays your music on a weekly schedule and shuffles song in between to fit the gaps. Written in Python3 and SQLite. It runs on Linux and plays to connected browser. Really cool Raspberry Pi (3 or higher) project.
 
+Helpful Hints:
+1. Use youtube-dl command line tool to populate shuffle folder(https://ytdl-org.github.io/youtube-dl/index.html)
+  My config file looks like this:
+  # Lines starting with # are comments
+  # Always extract audio
+  -x
+  #use highest quality
+  --audio-quality 0
+  #mp3 only
+  --audio-format mp3
+  #remove spaces and special characters in file name
+  --restrict-filenames
+  #--get-filename -o '%(title)s.%(ext)s'
+  -o '%(title)s.%(ext)s'
+  
+  For example(only use this tool on legally distributable content like Steadman and Creative Commons songs): 
+  youtube-dl https://www.youtube.com/watch?v=ctCsZiQE_rQ
+  [youtube] ctCsZiQE_rQ: Downloading webpage
+  [youtube] ctCsZiQE_rQ: Downloading video info webpage
+  [download] Destination: 4_Steadman_-_Good_To_Go.webm
+  [download] 100% of 3.77MiB in 00:00
+  [ffmpeg] Destination: 4_Steadman_-_Good_To_Go.mp3
+  Deleting original file 4_Steadman_-_Good_To_Go.webm (pass -k to keep)
+
 Todo (20190806):
 1. Upload database creation scripts.
 2. Get working over a smart phone browser(IPython.display.Audio autoplay non-functioning).
@@ -12,3 +36,7 @@ David Laganella - Master composer, virtuoso, author and professor.
   (https://en.wikipedia.org/wiki/David_Laganella)
   
 Jackie Neale - Artist.(https://jackiephoto.photoshelter.com/index)  
+
+Tim Seyfarth Garner - Musician, songwriter and producer.
+
+Timmy Garner - Friend.
