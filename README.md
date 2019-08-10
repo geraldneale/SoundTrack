@@ -4,8 +4,8 @@ A group of Jupyter Notebooks that plays your music on a weekly schedule and shuf
 Helpful Hints:
 1. Use youtube-dl command line tool to populate shuffle folder(https://ytdl-org.github.io/youtube-dl/index.html)
   My config file looks like this:
-  # Lines starting with # are comments
-  # Always extract audio
+  #Lines starting with # are comments
+  #Always extract audio
   -x
   #use highest quality
   --audio-quality 0
