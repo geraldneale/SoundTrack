@@ -46,5 +46,5 @@ Concept:
 
 Soundtrack is an internet connected juke box with a calendar and alarm clock attached.
 
-I created it in early 2019 to make my routine life more cinematic through music curation, I open sourced it to put a line on my resume for programming Python3 and SQL, now that it's in the public domain do anything you want with it or leave it default letting me curate your week and if your routine doesn't feel cinematic enough I will try to improve the experience over time.
+I created it in early 2019 to make my routine life more cinematic through music curation, I open sourced it to put a line on my resume for programming Python3 and SQL, and now that it's in the public domain do anything you want with it or leave it default letting me curate your week and if your routine doesn't feel cinematic enough I will try to improve the experience over time.
 
