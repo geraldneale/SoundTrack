@@ -1,4 +1,5 @@
 # SoundTrack
+Summary:
 A group of Jupyter Notebooks that plays your music on a weekly schedule and shuffles song in between to fit the gaps. Written in Python3 and SQLite. It runs on Linux and plays to connected browser. Really cool Raspberry Pi (3 or higher) project.
 
 Helpful Hints:
@@ -40,3 +41,10 @@ Jackie Neale - Artist.(https://jackiephoto.photoshelter.com/index)
 Tim Seyfarth Garner - Musician, songwriter and producer.
 
 Timmy Garner - Friend.
+
+Concept:
+
+Soundtrack is an internet connected juke box with a calendar and alarm clock attached.
+
+I created it in early 2019 to make my routine life more cinematic through music curation, I open sourced it to put a line on my resume for programming Python3 and SQL, and now that it's in the public domain do anything you want with it or leave it default letting me curate your week and if your routine doesn't feel cinematic enough I will try to improve the experience over time.
+
