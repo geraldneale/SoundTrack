@@ -1,11 +1,5 @@
 import sqlite3 
 from datetime import datetime
-
-def db_name():
-    #db_name='soundtrack.db'
-    db_name='soundtrack-gn.db'
-    return db_name
-
 def getMediaDuration(file):
     
     import subprocess
@@ -25,7 +19,7 @@ def getMediaName(file):
 
 def getShuffleCountMode():
     
-    con = sqlite3.connect(db_name())
+    con = sqlite3.connect('soundtrack.db')
     table='shuffle_count'
     statement ='SELECT cnt,COUNT(name) shuffle_cnt FROM {} GROUP BY cnt ORDER BY shuffle_cnt ASC'.format(table)
     cursor=con.execute(statement)
@@ -35,21 +29,10 @@ def getShuffleCountMode():
     con.close()
     return mode
 
-def incrementShuffleCount(statement,song):
-    
-    con = sqlite3.connect(db_name())
-    table='shuffle_count'
-    statement=getShuffleCountExists(song[0])
-    print(statement)
-    con.execute(statement)
-    con.commit()
-    con.close()
-    
-
 #check if the song exists in the db table shuffle_count already
 def getShuffleCountExists(name):
     
-    con = sqlite3.connect(db_name())
+    con = sqlite3.connect('soundtrack.db')
     table='shuffle_count'
     statement ='SELECT cnt FROM {} WHERE name="{}" LIMIT 0,1'.format(table,name)
     cursor=con.execute(statement)
@@ -65,6 +48,55 @@ def getShuffleCountExists(name):
         statement ='INSERT INTO {} (name,cnt,time) VALUES ("{}",{},"{}")'.format(table,name,cnt,dt)
     con.close()
     return statement
+
+#create shuffle list (replaces cronjob pickle that does same thing 4x/day 20190819
+def getMusicDicts():
+    
+    import operator
+    con = sqlite3.connect('soundtrack.db')
+    table='shuffle_count'
+    statement ='SELECT * FROM {} ORDER BY cnt ASC'.format(table)
+    cursor=con.execute(statement)
+    rows = cursor.fetchall()
+    i=0
+    dicts = {}
+    for row in rows:
+        file=row[0]
+        cnt=row[1]
+        duration=row[3]
+        dicts[file]=cnt,i,duration
+        i=i+1
+    con.close()
+    music_dicts=sorted(dicts.items(),key=operator.itemgetter(1))
+    return music_dicts
+
+def getNearbySchedule(dow,time):
+    
+    from datetime import datetime, timedelta
+    #current_dow=datetime.now().strftime('%w')
+    db="soundtrack.db"
+    table='song_schedule'
+    #current_time=datetime.now().strftime('%H:%M:%S')
+    end_tm=datetime.now() + timedelta(0,float(3000))
+    end_tm=end_tm.strftime('%H:%M:%S')
+    beg_tm=datetime.now() + timedelta(0,float(-3000))
+    beg_tm=beg_tm.strftime('%H:%M:%S')
+    statement="SELECT * FROM {} WHERE dow={} ORDER BY dow ASC, time ASC".format(table,dow)
+    con = sqlite3.connect(db) 
+    cursor=con.execute(statement)
+    rows = cursor.fetchall()
+    con.close()
+    i=0
+    for row2 in rows:
+        if str(beg_tm) < row2[1] < str(end_tm):
+            #print a few st songs before and after now
+            if ((str(time) < row2[1]) and i==0):
+                print("Next: {}: {}".format(row2[1],row2[2]))
+                i=i+1
+            else:
+                print("{}: {}".format(row2[1],row2[2]))
+    
+
 
 #implement this function below when you get a chance 20190316
 def getNextSTDifference(current_dow,current_time):
@@ -82,3 +114,4 @@ def getNextSTDifference(current_dow,current_time):
     difference=difference.seconds
     con.close()
     return difference
+
