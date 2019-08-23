@@ -1,5 +1,7 @@
 import sqlite3 
 from datetime import datetime
+con = sqlite3.connect('soundtrack.db')
+
 def getMediaDuration(file):
     
     import subprocess
@@ -95,9 +97,47 @@ def getNearbySchedule(dow,time):
                 i=i+1
             else:
                 print("{}: {}".format(row2[1],row2[2]))
+
+def getDBStatus(): #loop through shuffle songs checking in the DB and if not output to list
     
-
-
+    import glob
+    import sqlite3
+    pathMusic,music_source="/home/pi/Music/","*.mp3"
+    db,table='soundtrack.db','shuffle_count'
+    con=sqlite3.connect(db)
+    music_list=glob.glob(pathMusic+music_source)
+    new_files=[]
+    #print(music_list)
+    for file in music_list:
+        #print(file)
+        statement ='SELECT cnt FROM {} WHERE name="{}" LIMIT 0,1'.format(table,file)
+        #print(statement)
+        cursor=con.execute(statement)
+        row = cursor.fetchall()
+        if row:
+            pass
+        else:
+            new_files.append(file)     
+    return new_files
+    
+def addToDB():
+    
+    table='shuffle_count'
+    new_files=getDBStatus()
+    mode=getShuffleCountMode()
+    for file in new_files:        
+        duration=round(float(getMediaDuration(file)))
+        print(file,mode-4,duration)
+        dtime="00:00:00"
+        try:
+            statement ="INSERT INTO {} (name,duration_sec,cnt,time) VALUES ('{}','{}',{},'{}')".format(table,file,duration,mode-4,dtime)
+            con.execute(statement)
+            print("Successfully entered into database.\n{}".format(statement))
+        except sqlite3.Error as e:
+            print(e)
+    con.commit()
+    con.close()
+    
 #implement this function below when you get a chance 20190316
 def getNextSTDifference(current_dow,current_time):
 
