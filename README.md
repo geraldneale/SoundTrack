@@ -1,50 +1,23 @@
 # SoundTrack
 Summary:
-A group of Jupyter Notebooks that plays your music on a weekly schedule and shuffles song in between to fit the gaps. Written in Python3 and SQLite. It runs on Linux and plays to connected browser. Really cool Raspberry Pi (3 or higher) project.
+A group of Jupyter Notebooks that plays your music on a weekly schedule and shuffles songs in between to fit the gaps. Written in Python3 and SQLite. It runs on Linux and plays to connected browser. Really cool Raspberry Pi (3 or higher) project.
 
-Helpful Hints:
-1. Use youtube-dl command line tool to populate shuffle folder(https://ytdl-org.github.io/youtube-dl/index.html)
-  My config file looks like this:
-  #Lines starting with # are comments
-  #Always extract audio
-  -x
-  #use highest quality
-  --audio-quality 0
-  #mp3 only
-  --audio-format mp3
-  #remove spaces and special characters in file name
-  --restrict-filenames
-  #--get-filename -o '%(title)s.%(ext)s'
-  -o '%(title)s.%(ext)s'
-  
-  For example(only use this tool on legally distributable content like Steadman and Creative Commons songs): 
-  youtube-dl https://www.youtube.com/watch?v=ctCsZiQE_rQ
-  [youtube] ctCsZiQE_rQ: Downloading webpage
-  [youtube] ctCsZiQE_rQ: Downloading video info webpage
-  [download] Destination: 4_Steadman_-_Good_To_Go.webm
-  [download] 100% of 3.77MiB in 00:00
-  [ffmpeg] Destination: 4_Steadman_-_Good_To_Go.mp3
-  Deleting original file 4_Steadman_-_Good_To_Go.webm (pass -k to keep)
+Concept:
 
-Todo (20190806):
-1. Upload database creation scripts.
-2. Get working over a smart phone browser(IPython.display.Audio autoplay non-functioning).
-3. Get working in a Tesla browser through group nightly prayer to Tesla's update team to allow HTML 5 sound of any kind.
+Soundtrack is an internet connected juke box with a calendar and alarm clock attached.
+
+Created in early 2019 to make my routine life more cinematic through personal music collection curation. I open sourced it to put a line on my resume for programming Python3 and SQL. Now in the public domain do anything you want within the GPL3 constraints. The default settings let me curate your week using public domain music.
 
 Special thanks to:
 
-David Laganella - Master composer, virtuoso, author and professor.
+David Laganella - Composer, virtuoso, author and professor.
   (https://en.wikipedia.org/wiki/David_Laganella)
   
 Jackie Neale - Artist.(https://jackiephoto.photoshelter.com/index)  
 
 Tim Seyfarth Garner - Musician, songwriter and producer.
 
-Timmy Garner - Friend.
-
-Concept:
-
-Soundtrack is an internet connected juke box with a calendar and alarm clock attached.
-
-I created it in early 2019 to make my routine life more cinematic through music curation, I open sourced it to put a line on my resume for programming Python3 and SQL, and now that it's in the public domain do anything you want with it or leave it default letting me curate your week and if your routine doesn't feel cinematic enough I will try to improve the experience over time.
-
+Todo (20190806):
+1. Upload database creation scripts.
+2. Get working over a smart phone browser(autoplay non-functioning).
+3. Get working in a Tesla browser.
