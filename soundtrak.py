@@ -2,10 +2,22 @@ import subprocess
 import sqlite3
 from datetime import datetime, timedelta
 import calendar
+import IPython
+from time import sleep
+
+#constants
+MODE_OFFSET = 3 #new songs enter the shuffle count at a deficit relative to mode so that they play more frequently at first
 
 
-mode_offset = 1
-
+#functions
+#not in use yet but soon 2022-12-11
+def now_play(song,song_count,song_file,song_seconds):
+    
+        print("Now playing:\t\t{}\t\tShuffle_count: {}".format(song,song_count))
+        IPython.display.display(IPython.display.Audio(song_file,autoplay=True, embed=None))
+        shuffle_count_increment(song,song_count)
+        sleep(song_seconds)
+                        
 #use this to determine if we are in DST
 def is_dst ():
     """Determine whether or not Daylight Savings Time (DST)
@@ -35,14 +47,14 @@ def create_music_list(path_music):
     music_source="*.mp3"
     return glob.glob(path_music + music_source)
 
-#add song with a count of the mode - mode offset (currently 4)
+#add song with a count of the mode minus MODE_OFFSET (currently 3)
 #this makes it so that newly added songs are played often before becoming normalized in shuffle
 def shuffle_count_insert(sng_name, mode, song_seconds):
     
     from datetime import timedelta
     con = sqlite3.connect('soundtrak.db')
     table = "shuffle_count"      
-    count = mode - mode_offset
+    count = mode - MODE_OFFSET
     dt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     statement = 'INSERT INTO {} (name,count,time,duration_sec) \
     VALUES ("{}",{},"{}","{}")'.format(table,sng_name,count,dt,song_seconds)
@@ -169,28 +181,3 @@ def song_name(file):
     a = file.split('/')
     
     return a[-1]
-
-#maybe obsolete by now and replace by shuffle_count_insert 20221118
-#check if the song exists in the db table shuffle_count already and if not add it with a count of the mode minus 4
-#this makes it so that newly added songs are played more often for four times then becomes normalized
-# def shuffle_count_exists_or_add(name, mode, song_seconds):
-    
-#     from datetime import timedelta
-#     con = sqlite3.connect('soundtrak.db')
-#     table = "shuffle_count"
-#     statement = 'SELECT count FROM {} WHERE name="{}" LIMIT 0,1'.format(table,name)
-#     cursor = (statement)
-#     rows = cursor.fetchall()
-#     dt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-#     if rows:
-#         count = rows[0][0]+1
-#         statement = 'UPDATE {} SET count={},time="{}" WHERE name="{}"'.format(table,count,dt,name)
-#     else:      
-#         count = mode - 4
-#         statement = 'INSERT INTO {} (name,count,time,duration_sec) \
-#         VALUES ("{}",{},"{}","{}")'.format(table,name,count,dt,song_seconds)
-#     con.execute(statement)
-#     con.commit()  
-#     con.close()
-    
-#     return statement
