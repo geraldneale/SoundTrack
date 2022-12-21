@@ -88,7 +88,7 @@ def sort_shuffle_count(music_list, path_music):
             print(f"Mode from db: {mode}")
             song_seconds = song_duration(path_music+sng_name)
             shuffle_count_insert(sng_name, mode[0], song_seconds)
-            music_list_sorted.append([sng_name,mode[0]-mode_offset,int(song_seconds)])        
+            music_list_sorted.append([sng_name,mode[0] - MODE_OFFSET,int(song_seconds)])        
     con.close()
             
         
